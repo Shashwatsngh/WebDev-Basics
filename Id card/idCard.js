@@ -4,7 +4,7 @@ let form= document.querySelector("form")
 //     dets.preventDefault()
 //     console.log("form submitted")
 // })
-
+let inputs=document.querySelectorAll("input")
 form.addEventListener("submit",function(dets){
     dets.preventDefault()
     let card=document.querySelector(".card")
@@ -32,5 +32,12 @@ form.addEventListener("submit",function(dets){
     // img.classList.add("img")
     card.removeAttribute("hidden")
     
+    inputs.forEach(function(input)
+{
+    if(input.type!="submit")
+    {
+        input.value=""
+        }
+})
 })
 
