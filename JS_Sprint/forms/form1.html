@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        form{
+            display: flex;
+            flex-direction: column;
+            max-width: 300px;
+            justify-content: center;
+           padding: 10px;
+           margin: 10px;
+        }
+        small{
+            display: none  ;
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <form>
+        <input required minlength="5" maxlength="10" id="name" type="text" placeholder="name"></input>
+        <!-- required is used to make the input field mandatory, min length and max length defines the length of the input and also this is not a good method to implement validation, since it can be bypassed, therefore validation through js is better -->
+        <small>name should be more than 5 characters</small>
+        <br>
+        <input pattern="[a-z][0-9]" type="email" placeholder="email"></input>
+        <!-- pattern is used to define the pattern of the input, this wont allow the capital letters as well, it wont allow the form to be submitted -->
+        <br>
+        <input type="password" placeholder="password"></input>
+        <br>
+        <select>
+            <option value="male">male</option>
+            <option value="female">female</option>
+            <option value="other">other</option>
+        </select>
+        <br>
+        <input type="submit"></input>
+    </form>
+
+
+    <script src="form1.js"></script> 
+</body>
+</html>
