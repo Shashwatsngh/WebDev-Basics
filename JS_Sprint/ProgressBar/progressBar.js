@@ -1,7 +1,7 @@
 let progress=document.querySelector("#progress")
 let percent=document.querySelector("#percent")
 let text=document.querySelector("#text")
-let count=98
+let count=0
 let interval=setInterval(function(){
     if(count<99){
         count+=1
@@ -16,4 +16,4 @@ let interval=setInterval(function(){
     else{
         clearInterval(interval)
     }
-},1000)  
+},10)  
