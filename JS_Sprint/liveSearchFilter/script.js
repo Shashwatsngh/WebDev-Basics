@@ -96,3 +96,14 @@ inp.addEventListener("input",function(){
     }
     showUsers(filteredUsers)
 })
+
+document.addEventListener('keydown', function(e) {
+    // Check if the user is already typing in an input or textarea
+    const activeElement = document.activeElement;
+    const isTyping = activeElement.tagName === 'INPUT' || activeElement.tagName === 'TEXTAREA';
+
+    // Also check if the key is a single character (to avoid modifier keys like Ctrl, Shift, etc.)
+    if (!isTyping && e.key.length === 1 && !e.ctrlKey && !e.altKey && !e.metaKey) {
+        inp.focus();
+    }
+});
