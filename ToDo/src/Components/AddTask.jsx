@@ -27,6 +27,7 @@ const AddTask = () => {
     setPriority("Medium");
     setStatus("Pending");
     setTag("General");
+    setDueDateManuallyChanged(false); // Reset the manual change flag
   };
 
   const [taskName, setTaskName] = useState("");
@@ -36,6 +37,25 @@ const AddTask = () => {
   const [priority, setPriority] = useState("Medium");
   const [status, setStatus] = useState("Pending");
   const [tag, setTag] = useState("General");
+  const [dueDateManuallyChanged, setDueDateManuallyChanged] = useState(false);
+
+  // Handle start date change
+  const handleStartDateChange = (e) => {
+    const newStartDate = e.target.value;
+    setStart(newStartDate);
+    
+    // If start date is greater than due date and due date hasn't been manually changed
+    if (newStartDate > due && !dueDateManuallyChanged) {
+      setDue(newStartDate);
+    }
+  };
+
+  // Handle due date change
+  const handleDueDateChange = (e) => {
+    const newDueDate = e.target.value;
+    setDue(newDueDate);
+    setDueDateManuallyChanged(true); // Mark that user has manually changed the due date
+  };
 
   return (
     <div className="flex flex-col items-start justify-start p-6 border-gray-300 bg-white w-100 gap-1">
@@ -70,7 +90,7 @@ const AddTask = () => {
             id="startDate"
             type="date"
             className="w-full p-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-            onChange={(e) => setStart(e.target.value)}
+            onChange={handleStartDateChange}
             value={start}
             required
           />
@@ -85,7 +105,7 @@ const AddTask = () => {
             className="w-full p-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             value={due}
             min={start}
-            onChange={(e) => setDue(e.target.value)}
+            onChange={handleDueDateChange}
             required
           />
         </div>
