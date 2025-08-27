@@ -14,28 +14,23 @@
 // we need to import DataContext from the usercontext file
 // we need to import Datacontext from the usercontext file
 // also we need to pass the value as a prop to Datacontext
- 
-import React, { useContext } from 'react'
-import { DataContext } from './Context/UserContext'
- 
+
+import React, { useContext } from "react";
+import { DataContext } from "./Context/UserContext";
+
 const App = () => {
-  const data=useContext(DataContext)
-  console.log(data)
-  return (
-    <div>Hey {data}</div>
-  )
-}
+  const data = useContext(DataContext);
+  console.log(data);
+  return <div>Hey {data}</div>;
+};
 
-export default App
-
-
-
+export default App;
 
 // learning router in react
 //first step wrap App with BrowserRouter in main.jsx
 //second step create Routes and Route components in App.jsx
 //third step create pages for each route in pages folder
-// make sure to import pages in App.jsx and also to import BrowserRouter in main.jsx, and also to import Routes and Route in App.jsx 
+// make sure to import pages in App.jsx and also to import BrowserRouter in main.jsx, and also to import Routes and Route in App.jsx
 
 //for linking a route to an element, use a tag and set the path of the route as the href attribute of the a tag
 
@@ -59,7 +54,6 @@ export default App
 
 // export default App
 
-
 //api calling using axios
 
 // import React, { useEffect, useState } from 'react'
@@ -76,7 +70,8 @@ export default App
 //   useEffect(() => {
 //     getData()
 //   }, [])
-  
+
+// useEffect is a hook that is used to run a function when the component is rendered, therefore this will get the data as soon as the site is loaded and the component is visible, in this case it will hit the api
 
 //   return (
 //     <div
@@ -88,7 +83,6 @@ export default App
 //        className='p-2 bg-blue-500 text-white rounded-md'>
 //         Get Data
 //       </button>
-
 
 //       <div
 //       className='p-4 mt-4 gap-5 flex flex-wrap'>
@@ -110,9 +104,6 @@ export default App
 
 // export default App
 
-
-
-
 //Making multiple cards using components and props
 // import Navbar from './Components/Navbar'
 // import BodyCard from './BodyCard'
@@ -129,7 +120,6 @@ export default App
 //   )
 // }
 // export default App
-
 
 // Learning how to make components in react
 //made a navbar, footer and body of a website using components
@@ -150,16 +140,9 @@ export default App
 
 // export default App
 
-
-
-
-
-
-
 // making a form in react
 
 // import React, { useState } from 'react'
-
 
 // const App = () => {
 //   const [username, setUsername] = useState("")
@@ -170,25 +153,25 @@ export default App
 //   return (
 //     <form onSubmit={(e)=>{
 //         handleSubmit(e)
-//     }} 
+//     }}
 //     className='flex flex-col items-center justify-center m-8 p-8 bg-gray-900 rounded-lg gap-4'>
 
-//         <input 
+//         <input
 //         onChange={(e)=>{
 //             setUsername(e.target.value)
 //         }}
-//         value={username} 
-//         className='px-2 py-2 bg-blue-100 text-black rounded-md text-xl w-full' 
-//         type="text" 
+//         value={username}
+//         className='px-2 py-2 bg-blue-100 text-black rounded-md text-xl w-full'
+//         type="text"
 //         placeholder='Enter your name'/>
 
 //         <div className='flex gap-4 w-full'>
 
 //           <input className='px-2 py-2 bg-blue-800 text-white rounded-md text-lg w-full' type="submit" />
 
-//           <button 
-//           type="button" 
-//           onClick={() => setUsername("")} 
+//           <button
+//           type="button"
+//           onClick={() => setUsername("")}
 //           className='px-2 py-2 bg-red-600 text-white rounded-md text-lg w-full'>
 //             Clear
 //             </button>
@@ -200,9 +183,7 @@ export default App
 
 // export default App
 
-
 // as we can see adding value={username} to input tag will make it a controlled component, by controlled component we mean that the value of the input tag is controlled by the state, by state we mean the value of the variable, so if we want to change the value of the input tag we need to change the value of the variable
-
 
 // if we remove value={username} from input tag then it will become an uncontrolled component, by uncontrolled component we mean that the value of the input tag is not controlled by the state, so we cannot change the value of the input tag using useState
 
@@ -212,10 +193,7 @@ export default App
 
 //two way binding is a concept where the value of the input tag is controlled by the state, so we can use useState to control the value of the input tag and onChange event to update the value of the input tag, and react also knows when the value of the input tag is updated then it will update the state
 
-
-
 //implementing a counter in react and learning state
-
 
 // import React, { useState } from 'react'
 
@@ -244,7 +222,7 @@ export default App
 
 //hooks-speical type of functions, can be used for state management, dom manipulation
 // const [first, setfirst] = useState(second)
-// first is readable variable, setfirst is writable var, second is the value we are assigning initially  
+// first is readable variable, setfirst is writable var, second is the value we are assigning initially
 
-// index is the parent of main and main is the parent of app 
-// when we import index.css to main then all the elements in app will have the css properties of index.css 
+// index is the parent of main and main is the parent of app
+// when we import index.css to main then all the elements in app will have the css properties of index.css
