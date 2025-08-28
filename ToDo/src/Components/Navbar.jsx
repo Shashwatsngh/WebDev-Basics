@@ -20,6 +20,8 @@ const Navbar = ({
   setDate,
   deleted,
   setDeleted,
+  search,
+  setSearch,
 }) => {
   const today = new Date().toISOString().split("T")[0];
 
@@ -34,6 +36,8 @@ const Navbar = ({
         type="text"
         placeholder="Search"
         className="bg-slate-600 w-full h-10 rounded p-2 ml-8 mr-25 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        value={search}
+        onChange={(e) => setSearch(e.target.value)}
       />
 
       <div className="align-center flex gap-9 text-l font-semibold mr-12 ">
@@ -51,9 +55,8 @@ const Navbar = ({
         <div className="flex flex-col justify-center items-center gap-2 z-10">
           <BsCalendarDay className="h-7 w-7 text-white" />
           <DatePicker
-            // selected={date}
-            value={date}
-            onChange={(e) => setDate(e)}
+            selected={date ? new Date(date) : null}
+            onChange={(date) => setDate(date.toISOString().split("T")[0])}
             className="bg-slate-600 text-white h-7 rounded w-27 items-center justify-center p-1"
             popperClassName="z-50"
             portalId="root"
@@ -69,9 +72,7 @@ const Navbar = ({
             value={priority}
             onChange={(e) => setPriority(e.target.value)}
           >
-            <option value="All" >
-              All
-            </option>
+            <option value="All">All</option>
             <option value="High">High</option>
             <option value="Medium">Medium</option>
             <option value="Low">Low</option>
@@ -88,9 +89,7 @@ const Navbar = ({
             value={status}
             onChange={(e) => setStatus(e.target.value)}
           >
-            <option value="All" >
-              All
-            </option>
+            <option value="All">All</option>
             <option value="Completed">Completed</option>
             <option value="Pending">Pending</option>
             <option value="In Progress">In Progress</option>
@@ -123,9 +122,7 @@ const Navbar = ({
             value={tag}
             onChange={(e) => setTag(e.target.value)}
           >
-            <option value="All">
-              All
-            </option>
+            <option value="All">All</option>
             <option value="Work">Work</option>
             <option value="Personal">Personal</option>
             <option value="Home">Home</option>

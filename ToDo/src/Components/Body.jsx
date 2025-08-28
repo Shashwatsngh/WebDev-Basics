@@ -5,24 +5,31 @@ import InProgress from "./InProgress";
 import Completed from "./Completed";
 import AddTask from "./AddTask";
 
-const Body = ({ priority, status, tag, date, deleted }) => {
+const Body = ({ priority, status, tag, date, deleted ,search}) => {
   const { tasks } = useContext(TaskContext);
 
-  const filteredTasks = tasks.filter((task) => {
+  const filteredTasks = tasks.filter((task) =>
+  {
+    // Search filter
+    if (search !== "") {
+      if (!task.name.toLowerCase().includes(search.toLowerCase())) {
+        return false;
+      }
+    }
     // Priority filter
-    if (priority !== "" && priority !== "All") {
+    if (priority !== "All") {
       if (task.taskPriority !== priority) return false;
     }
     // Status filter
-    if (status !== "" && status !== "All") {
+    if (status !== "All") {
       if (task.taskStatus !== status) return false;
     }
     // Tag filter
-    if (tag !== "" && tag !== "All") {
+    if (tag !== "All") {
       if (task.taskTag !== tag) return false;
     }
     // Date filter
-    if (date !== "" && task.startDate !== date) {
+    if (task.startDate !== date) {
       return false;
     }
     return true;
