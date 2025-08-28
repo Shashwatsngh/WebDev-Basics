@@ -65,7 +65,7 @@ const Navbar = ({
           <FaStar className="h-7 w-7" />
           <select
             name="priority"
-            className="h-7 rounded bg-slate-600 text-white items-center justify-center"
+            className="h-7 rounded bg-slate-600 text-white items-center justify-center p-1"
             value={priority}
             onChange={(e) => setPriority(e.target.value)}
           >
@@ -84,7 +84,7 @@ const Navbar = ({
           <select
             name="status"
             id=""
-            className="w-27 h-7 rounded bg-slate-600"
+            className="w-27 h-7 rounded bg-slate-600 text-white items-center justify-center p-1"
             value={status}
             onChange={(e) => setStatus(e.target.value)}
           >
@@ -119,7 +119,7 @@ const Navbar = ({
           <select
             name="tag"
             id=""
-            className="h-7 w-25 rounded bg-slate-600"
+            className="h-7 w-25 rounded bg-slate-600 text-white items-center justify-center p-1"
             value={tag}
             onChange={(e) => setTag(e.target.value)}
           >
