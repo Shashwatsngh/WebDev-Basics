@@ -1,12 +1,15 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { RiDeleteBinLine } from "react-icons/ri";
 import { TaskContext } from "../Context/TaskContext";
 
 const Task = ({ value, index }) => {
   const { tasks, setTasks } = useContext(TaskContext);
+  const [isHovered, setIsHovered] = useState(false);
 
   let priorityColor = "bg-slate-200";
-  if (value.taskPriority === "High")
+  if (isHovered === true) {
+    priorityColor = "bg-slate-100";
+  } else if (value.taskPriority === "High")
     priorityColor = "bg-red-100 border-red-400";
   else if (value.taskPriority === "Medium")
     priorityColor = "bg-yellow-100 border-yellow-400";
@@ -43,23 +46,41 @@ const Task = ({ value, index }) => {
   };
   return (
     <div
-      className={`flex flex-row gap-1 p-1 h-12 w-full border rounded-lg justify-between items-center break-words ${priorityColor}`}
+      className={`flex flex-col h-auto w-full border rounded-lg gap-2 p-2 ${priorityColor} transition-all duration-500 ease-in-out whitespace-pre-line`}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
     >
-      <input
-        type="checkbox"
-        className="h-6 w-6"
-        checked={value.taskStatus === "Completed"}
-        onChange={(e) => {
-          handleCheckboxChange(e);
-        }}
-      />
-      <h2 className="text-base font-semibold break-words">{value.name}</h2>
-      <RiDeleteBinLine
-        className="h-6 w-6"
-        onClick={(e) => {
-          deleteTask();
-        }}
-      />
+      <div className="flex flex-row gap-3 p-2 justify-between items-center">
+        <input
+          type="checkbox"
+          className="h-6 w-6 "
+          checked={value.taskStatus === "Completed"}
+          onChange={(e) => {
+            handleCheckboxChange(e);
+          }}
+        />
+        <h2 className="text-base font-semibold break-words w-full">{value.name}</h2>
+        <RiDeleteBinLine
+          className="h-6 w-6 "
+          onClick={(e) => {
+            deleteTask();
+          }}
+        />
+      </div>
+
+      {isHovered && (
+        <div className="break-words w-full $(isHovered ? 'max-h-100' : 'max-h-0') whitespace-pre-line overflow-hidden transition-all duration-1000 ease-in-out">
+          <h4 className="font-bold">Description:</h4> {value.description}
+          <br />
+          <h4 className="font-bold">Tag:</h4> {value.taskTag}
+          <br />
+          <h4 className="font-bold">Created At:</h4> {value.startDate}
+          <br />
+          <h4 className="font-bold">Due Date:</h4> {value.dueDate}
+          <br />
+          <h4 className="font-bold">Priority:</h4> {value.taskPriority}
+        </div>
+      )}
     </div>
   );
 };
