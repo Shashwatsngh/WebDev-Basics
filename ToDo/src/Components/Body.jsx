@@ -5,14 +5,36 @@ import InProgress from "./InProgress";
 import Completed from "./Completed";
 import AddTask from "./AddTask";
 
-const Body = () => {
+const Body = ({ priority, status, tag, date, deleted }) => {
   const { tasks } = useContext(TaskContext);
 
-  const pendingTasks = tasks.filter((task) => task.taskStatus === "Pending");
-  const inProgressTasks = tasks.filter(
+  const filteredTasks = tasks.filter((task) => {
+    // Priority filter
+    if (priority !== "" && priority !== "All") {
+      if (task.taskPriority !== priority) return false;
+    }
+    // Status filter
+    if (status !== "" && status !== "All") {
+      if (task.taskStatus !== status) return false;
+    }
+    // Tag filter
+    if (tag !== "" && tag !== "All") {
+      if (task.taskTag !== tag) return false;
+    }
+    // Date filter
+    if (date !== "" && task.startDate !== date) {
+      return false;
+    }
+    return true;
+  });
+
+  const pendingTasks = filteredTasks.filter(
+    (task) => task.taskStatus === "Pending"
+  );
+  const inProgressTasks = filteredTasks.filter(
     (task) => task.taskStatus === "In-Progress"
   );
-  const completedTasks = tasks.filter(
+  const completedTasks = filteredTasks.filter(
     (task) => task.taskStatus === "Completed"
   );
 

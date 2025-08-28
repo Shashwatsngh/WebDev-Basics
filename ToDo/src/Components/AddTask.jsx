@@ -43,7 +43,7 @@ const AddTask = () => {
   const handleStartDateChange = (e) => {
     const newStartDate = e.target.value;
     setStart(newStartDate);
-    
+
     // If start date is greater than due date and due date hasn't been manually changed
     if (newStartDate > due && !dueDateManuallyChanged) {
       setDue(newStartDate);
@@ -76,7 +76,6 @@ const AddTask = () => {
           value={taskName}
           onChange={(e) => setTaskName(e.target.value)}
         />
-
         {/* Task Description */}
         <input
           type="text"
@@ -85,7 +84,6 @@ const AddTask = () => {
           value={taskDes}
           onChange={(e) => setTaskDes(e.target.value)}
         />
-
         {/* Start date */}
         <div className="flex flex-col gap-2 mb-1">
           <label htmlFor="startDate" className="text-gray-600 font-medium">
@@ -100,7 +98,6 @@ const AddTask = () => {
             required
           />
         </div>
-
         {/* Due date */}
         <div className="flex flex-col gap-2 mb-1">
           <label htmlFor="dueDate" className="text-gray-600 font-medium">
@@ -116,7 +113,6 @@ const AddTask = () => {
             required
           />
         </div>
-
         {/* Status */}
         Status
         <select
@@ -131,9 +127,6 @@ const AddTask = () => {
           <option value="In-Progress">In Progress</option>
           <option value="Completed">Completed</option>
         </select>
-
-
-
         {/* Priority */}
         Priority
         <select
@@ -148,8 +141,6 @@ const AddTask = () => {
           <option value="Medium">Medium</option>
           <option value="High">High</option>
         </select>
-
-
         {/* Tag */}
         Tag
         <select
@@ -164,8 +155,6 @@ const AddTask = () => {
           <option value="Personal">Personal</option>
           <option value="General">General</option>
         </select>
-
-
         {/* Add button */}
         <button
           type="submit"
