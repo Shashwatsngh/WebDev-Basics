@@ -12,7 +12,7 @@ function App()
   const [status, setStatus] = useState("All");
   const [tag, setTag] = useState("All");
   const [date, setDate] = useState(today);
-  const [DWM, setDWM] = useState("Day");
+  // const [DWM, setDWM] = useState("Day");
   const [deleted, setDeleted] = useState(false);
   return (
     <TaskProvider>

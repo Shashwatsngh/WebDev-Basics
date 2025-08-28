@@ -44,11 +44,12 @@ const Navbar = ({
         {/* show deleted tasks */}
         <button
           onClick={(e) => {
-            setDeleted(true);
+            setDeleted(!deleted);
           }}
           className="flex flex-col justify-center items-center gap-2"
         >
           <RiDeleteBinLine className="h-10 w-10" />
+          {deleted ? "Show Tasks" : "Show Deleted"}
         </button>
 
         {/* filter by date */}

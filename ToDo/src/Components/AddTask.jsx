@@ -27,7 +27,8 @@ const AddTask = () => {
     setPriority("Medium");
     setStatus("Pending");
     setTag("General");
-    setDueDateManuallyChanged(false); // Reset the manual change flag
+    setDueDateManuallyChanged(false);
+    // Reset the manual change flag
   };
 
   const [taskName, setTaskName] = useState("");
@@ -54,11 +55,12 @@ const AddTask = () => {
   const handleDueDateChange = (e) => {
     const newDueDate = e.target.value;
     setDue(newDueDate);
-    setDueDateManuallyChanged(true); // Mark that user has manually changed the due date
+    setDueDateManuallyChanged(true);
+    // Mark that user has manually changed the due date
   };
 
   return (
-    <div className="flex flex-col items-start justify-start p-6 border-gray-300 bg-white w-100 gap-1">
+    <div className="flex flex-col items-start justify-start p-6 border-gray-300 bg-white w-100 gap-1 rounded-lg">
       <h2 className="text-2xl font-bold text-sky-400 mb-4">Add Task</h2>
 
       <form
