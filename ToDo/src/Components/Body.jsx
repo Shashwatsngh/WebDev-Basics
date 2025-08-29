@@ -112,7 +112,9 @@ const Body = ({ priority, status, tag, date, deleted, search }) => {
 
   return (
     <div className=" w-full gap-4 p-4 bg-zinc-400 text-gray-900 h-full">
-      <div className="flex flex-row gap-4 p-4">
+      {/* Desktop */}
+      <div className="hidden lg:flex flex-row gap-4 p-4">
+        <AddTask />
         {/* <DndContext onDragEnd={handleDragEnd}>
           <SortableContext
             id="pending"
@@ -133,7 +135,33 @@ const Body = ({ priority, status, tag, date, deleted, search }) => {
         <Completed tasks={completedTasks} />
         {/* </SortableContext>
         </DndContext> */}
+      </div>
+
+
+
+      {/* mobile */}
+      <div className="lg:hidden flex flex-wrap gap-4 p-4">
         <AddTask />
+        {/* <DndContext onDragEnd={handleDragEnd}>
+          <SortableContext
+            id="pending"
+            items={pendingTasks.map((task) => task.id)}
+          > */}
+        <Pending tasks={pendingTasks} />
+        {/* </SortableContext>
+          <SortableContext
+            id="in-progress"
+            items={inProgressTasks.map((task) => task.id)}
+          > */}
+        <InProgress tasks={inProgressTasks} />
+        {/* </SortableContext>
+          <SortableContext
+            id="completed"
+            items={completedTasks.map((task) => task.id)}
+          > */}
+        <Completed tasks={completedTasks} />
+        {/* </SortableContext>
+        </DndContext> */}
       </div>
     </div>
   );
