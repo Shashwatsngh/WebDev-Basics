@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { TaskProvider } from "./Context/TaskContext";
 import Body from "./Components/Body";
 import Navbar from "./Components/Navbar";
-import AddTaskButton from "./Components/addTaskButton";
+import AddTaskButton from "./Components/AddTaskButton";
 
 function App() {
   const today = new Date().toISOString().split("T")[0];
