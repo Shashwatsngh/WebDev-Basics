@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { SlCalender } from "react-icons/sl";
 import { RiDeleteBinLine } from "react-icons/ri";
 import { FaStar } from "react-icons/fa";
@@ -27,21 +27,69 @@ const Navbar = ({
   const today = new Date().toISOString().split("T")[0];
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
+  // Refs for search inputs
+  const desktopSearchRef = useRef(null);
+  const mobileSearchRef = useRef(null);
+
+  // Global keydown listener for auto-focus
+  useEffect(() => {
+    const handleKeyDown = (event) => {
+      // Check if user is typing (not using special keys)
+      const isTyping =
+        !event.ctrlKey &&
+        !event.metaKey &&
+        !event.altKey &&
+        event.key.length === 1 &&
+        event.key.match(/[a-zA-Z0-9\s]/);
+
+      // Check if user is not already focused on an input/textarea/select
+      const activeElement = document.activeElement;
+      const isInputFocused =
+        activeElement.tagName === "INPUT" ||
+        activeElement.tagName === "TEXTAREA" ||
+        activeElement.tagName === "SELECT";
+
+      if (isTyping && !isInputFocused) {
+        // Focus appropriate search input based on screen size
+        const isMobile = window.innerWidth < 1024;
+
+        if (isMobile && mobileSearchRef.current) {
+          mobileSearchRef.current.focus();
+          // Add the typed character to search
+          setSearch(event.key);
+        } else if (!isMobile && desktopSearchRef.current) {
+          desktopSearchRef.current.focus();
+          // Add the typed character to search
+          setSearch(event.key);
+        }
+      }
+    };
+
+    // Add event listener
+    document.addEventListener("keydown", handleKeyDown);
+
+    // Cleanup
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [setSearch]);
+
   return (
     <div className="sticky top-0 w-full text-white border-b border-neutral-800 bg-slate-900 shadow-md relative">
       {/* Desktop Layout */}
-      <div className="hidden lg:flex justify-between items-center h-30 p-4 break-words truncate">
+      <div className="hidden lg:flex justify-between items-center h-auto p-5 break-words truncate">
         {/* Logo */}
-        <h1 className="font-extrabold text-3xl p-10 flex gap-5">
-          <FcTodoList className="h-11 w-11" />
+        <h1 className="font-extrabold text-[5vmin] flex gap-2">
+          <FcTodoList className="h-auto w-auto" />
           To-Do List
         </h1>
 
         {/* Search */}
         <input
+          ref={desktopSearchRef}
           type="text"
           placeholder="Search"
-          className="bg-slate-600 w-full h-10 rounded p-2 ml-8 mr-25 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="autofocus bg-slate-600 w-auto m-2 h-10 rounded p-2  focus:outline-none focus:ring-2 focus:ring-blue-500"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
         />
@@ -148,8 +196,9 @@ const Navbar = ({
         {/* Mobile Search */}
         <div className="px-4 pb-4">
           <input
+            ref={mobileSearchRef}
             type="text"
-            placeholder="Search"
+            placeholder="Search (or just start typing)"
             className="bg-slate-600 w-full h-10 rounded p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
@@ -160,17 +209,20 @@ const Navbar = ({
         {mobileMenuOpen && (
           <div className="bg-slate-800 border-t border-neutral-700 p-4 space-y-4">
             <strong>Filters</strong>
-          <br />
+            <br />
+            <br />
             {/* show deleted tasks */}
-            <button
-              onClick={(e) => {
-                setDeleted(!deleted);
-              }}
-              className="flex items-center gap-3 w-auto p-2 rounded bg-slate-700 hover:bg-slate-600"
-            >
+            <div className="flex items-center gap-3 w-auto p-2 rounded">
               <RiDeleteBinLine className="h-6 w-6" />
-              {deleted ? "Show Tasks" : "Show Deleted"}
-            </button>
+              <button
+                onClick={(e) => {
+                  setDeleted(!deleted);
+                }}
+                className="w-auto p-2 bg-slate-700 hover:bg-slate-600"
+              >
+                {deleted ? "Show Tasks" : "Show Deleted"}
+              </button>
+            </div>
 
             {/* filter by date */}
             <div className="flex items-center gap-3 p-2">
@@ -178,8 +230,7 @@ const Navbar = ({
               <DatePicker
                 selected={date ? new Date(date) : null}
                 onChange={(date) => setDate(date.toISOString().split("T")[0])}
-                className="bg-slate-600 text-white h-8 rounded p-2 flex-1"
-                popperClassName="z-50"
+                className="bg-slate-600 text-white h-auto rounded p-2 w-auto"
                 portalId="root"
               />
             </div>
@@ -189,7 +240,7 @@ const Navbar = ({
               <FaStar className="h-6 w-6" />
               <select
                 name="priority"
-                className="h-8 rounded bg-slate-600 text-white p-2 w-auto"
+                className="h-auto rounded bg-slate-600 text-white p-2 w-auto"
                 value={priority}
                 onChange={(e) => setPriority(e.target.value)}
               >
@@ -205,7 +256,7 @@ const Navbar = ({
               <MdFilterList className="h-6 w-6" />
               <select
                 name="status"
-                className="h-8 rounded bg-slate-600 text-white p-2 w-auto"
+                className="h-auto rounded bg-slate-600 text-white p-2 w-auto"
                 value={status}
                 onChange={(e) => setStatus(e.target.value)}
               >
@@ -221,7 +272,7 @@ const Navbar = ({
               <FaTags className="h-6 w-6" />
               <select
                 name="tag"
-                className="h-8 rounded bg-slate-600 text-white p-2 w-auto"
+                className="h-auto rounded bg-slate-600 text-white p-2 w-auto"
                 value={tag}
                 onChange={(e) => setTag(e.target.value)}
               >

@@ -2,9 +2,12 @@ import React from "react";
 import { useState, useContext } from "react";
 import { TaskContext } from "../Context/TaskContext";
 
-const AddTask = () => {
+const AddTask = ({ modalOpen, setModalOpen }) => {
   const today = new Date().toISOString().split("T")[0];
   const { tasks, setTasks } = useContext(TaskContext);
+
+  console.log("Modal state:", modalOpen);
+  console.log("Screen width:", window.innerWidth);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -59,112 +62,139 @@ const AddTask = () => {
     // Mark that user has manually changed the due date
   };
 
-  return (
-    <div className="flex flex-col items-start justify-start p-6 border-gray-300 bg-white w-100 gap-1 rounded-lg">
-      <h2 className="text-2xl font-bold text-sky-400 mb-4">Add Task</h2>
+  const handleBlurClick = (e) => {
+    e.stopPropagation();
+    setModalOpen(false);
+  };
 
-      <form
-        className="flex flex-col gap-2"
-        onSubmit={(e) => {
-          handleSubmit(e);
+  const handleFormClick = (e) => {
+    e.stopPropagation();
+  };
+
+  return (
+    <div
+      className="fixed inset-0 backdrop-blur-sm z-50 flex items-center justify-end"
+      onClick={(e) => {
+        handleBlurClick(e);
+      }}
+    >
+      <div
+        className="flex flex-col items-center justify-end p-6 border-gray-300 bg-white w-auto h-auto m-30 gap-1 rounded-lg shadow-md "
+        onClick={(e) => {
+          handleFormClick(e);
         }}
       >
-        {/* Task Name */}
-        <input
-          type="text"
-          placeholder="Task name"
-          className="w-full p-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-          required
-          value={taskName}
-          onChange={(e) => setTaskName(e.target.value)}
-        />
-        {/* Task Description */}
-        <input
-          type="text"
-          placeholder="Task description"
-          className="w-full p-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-          value={taskDes}
-          onChange={(e) => setTaskDes(e.target.value)}
-        />
-        {/* Start date */}
-        <div className="flex flex-col gap-2 mb-1">
-          <label htmlFor="startDate" className="text-gray-600 font-medium">
-            Start date
-          </label>
+        <h2 className="text-2xl font-bold text-sky-400 mb-4">Add Task</h2>
+
+        <form
+          onClick={(e) => {
+            handleFormClick(e);
+          }}
+          className="flex flex-col gap-2"
+          onSubmit={(e) => {
+            handleSubmit(e);
+          }}
+        >
+          {/* Task Name */}
           <input
-            id="startDate"
-            type="date"
+            type="text"
+            placeholder="Task name"
             className="w-full p-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-            onChange={handleStartDateChange}
-            value={start}
             required
+            value={taskName}
+            onChange={(e) => setTaskName(e.target.value)}
           />
-        </div>
-        {/* Due date */}
-        <div className="flex flex-col gap-2 mb-1">
-          <label htmlFor="dueDate" className="text-gray-600 font-medium">
-            Due date
-          </label>
+          {/* Task Description */}
           <input
-            id="dueDate"
-            type="date"
+            type="text"
+            placeholder="Task description"
             className="w-full p-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-            value={due}
-            min={start}
-            onChange={handleDueDateChange}
-            required
+            value={taskDes}
+            onChange={(e) => setTaskDes(e.target.value)}
           />
-        </div>
-        {/* Status */}
-        Status
-        <select
-          name="status"
-          placeholder="Task Status"
-          className="w-full p-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-          value={status}
-          onChange={(e) => setStatus(e.target.value)}
-          required
-        >
-          <option value="Pending">Pending</option>
-          <option value="In-Progress">In Progress</option>
-          <option value="Completed">Completed</option>
-        </select>
-        {/* Priority */}
-        Priority
-        <select
-          name="priority"
-          placeholder="Task Priority"
-          className="w-full p-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-          onChange={(e) => setPriority(e.target.value)}
-          required
-          defaultValue="Medium"
-        >
-          <option value="Low">Low</option>
-          <option value="Medium">Medium</option>
-          <option value="High">High</option>
-        </select>
-        {/* Tag */}
-        Tag
-        <select
-          name="Tag"
-          placeholder="Tag"
-          className="w-full p-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-          value={tag}
-          onChange={(e) => setTag(e.target.value)}
-          required
-        >
-          <option value="Work">Work</option>
-          <option value="Personal">Personal</option>
-          <option value="General">General</option>
-        </select>
-        {/* Add button */}
-        <button
-          type="submit"
-          className="w-full p-2 bg-sky-400 text-white font-semibold rounded-md hover:bg-sky-600 transition-colors"
-        >
-          Add
-        </button>
-      </form>
+          {/* Start date */}
+          <div className="flex flex-col gap-2 mb-1">
+            <label htmlFor="startDate" className="text-gray-600 font-medium">
+              Start date
+            </label>
+            <input
+              id="startDate"
+              type="date"
+              className="w-full p-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              onChange={handleStartDateChange}
+              value={start}
+              required
+            />
+          </div>
+          {/* Due date */}
+          <div className="flex flex-col gap-2 mb-1">
+            <label htmlFor="dueDate" className="text-gray-600 font-medium">
+              Due date
+            </label>
+            <input
+              id="dueDate"
+              type="date"
+              className="w-full p-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              value={due}
+              min={start}
+              onChange={handleDueDateChange}
+              required
+            />
+          </div>
+          {/* Status */}
+          Status
+          <select
+            name="status"
+            placeholder="Task Status"
+            className="w-full p-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            value={status}
+            onChange={(e) => setStatus(e.target.value)}
+            required
+          >
+            <option value="Pending">Pending</option>
+            <option value="In-Progress">In Progress</option>
+            <option value="Completed">Completed</option>
+          </select>
+          {/* Priority */}
+          Priority
+          <select
+            name="priority"
+            placeholder="Task Priority"
+            className="w-full p-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            onChange={(e) => setPriority(e.target.value)}
+            required
+            defaultValue="Medium"
+          >
+            <option value="Low">Low</option>
+            <option value="Medium">Medium</option>
+            <option value="High">High</option>
+          </select>
+          {/* Tag */}
+          Tag
+          <select
+            name="Tag"
+            placeholder="Tag"
+            className="w-full p-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            value={tag}
+            onChange={(e) => setTag(e.target.value)}
+            required
+          >
+            <option value="Work">Work</option>
+            <option value="Personal">Personal</option>
+            <option value="General">General</option>
+          </select>
+          {/* Add button */}
+          <button
+            type="submit"
+            className="w-full p-2 bg-sky-400 text-white font-semibold rounded-md hover:bg-sky-600 transition-colors"
+            onClick={(e) => {
+              setModalOpen(false);
+            }}
+          >
+            Add
+          </button>
+        </form>
+      </div>
     </div>
   );
 };

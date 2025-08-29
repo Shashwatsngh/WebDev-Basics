@@ -111,10 +111,9 @@ const Body = ({ priority, status, tag, date, deleted, search }) => {
   );
 
   return (
-    <div className=" w-full gap-4 p-4 bg-zinc-400 text-gray-900 h-full">
+    <div className=" w-full gap-4 p-4 bg-zinc-400 text-gray-900 h-full min-h-screen">
       {/* Desktop */}
       <div className="hidden lg:flex flex-row gap-4 p-4">
-        <AddTask />
         {/* <DndContext onDragEnd={handleDragEnd}>
           <SortableContext
             id="pending"
@@ -137,11 +136,8 @@ const Body = ({ priority, status, tag, date, deleted, search }) => {
         </DndContext> */}
       </div>
 
-
-
       {/* mobile */}
       <div className="lg:hidden flex flex-wrap gap-4 p-4">
-        <AddTask />
         {/* <DndContext onDragEnd={handleDragEnd}>
           <SortableContext
             id="pending"

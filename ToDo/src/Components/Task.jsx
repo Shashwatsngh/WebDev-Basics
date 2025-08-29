@@ -84,7 +84,7 @@ const Task = ({ value, index }) => {
       </div>
 
       {isClicked && (
-        <div className="break-words w-full $(isHovered ? 'max-h-100' : 'max-h-0') whitespace-pre-line overflow-hidden transition-all duration-1000 ease-in-out">
+        <div className="break-words w-full $(isClicked ? 'max-h-100' : 'max-h-0') whitespace-pre-line overflow-hidden transition-all duration-1000 ease-in-out">
           <h4 className="font-bold">Description:</h4> {value.description}
           <br />
           <h4 className="font-bold">Tag:</h4> {value.taskTag}
