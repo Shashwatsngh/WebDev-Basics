@@ -75,9 +75,9 @@ const Navbar = ({
   }, [setSearch]);
 
   return (
-    <div className="sticky top-0 w-full text-white border-b border-neutral-800 bg-slate-900 shadow-md relative">
+    <div className="sticky top-0 w-full text-white border-b border-neutral-800 bg-slate-900 shadow-md">
       {/* Desktop Layout */}
-      <div className="hidden lg:flex justify-between items-center h-auto p-5 break-words truncate">
+      <div className="hidden lg:flex justify-between items-center h-auto p-5">
         {/* Logo */}
         <h1 className="font-extrabold text-[5vmin] flex gap-2">
           <FcTodoList className="h-auto w-auto" />
@@ -89,7 +89,7 @@ const Navbar = ({
           ref={desktopSearchRef}
           type="text"
           placeholder="Search"
-          className="autofocus bg-slate-600 w-auto m-2 h-10 rounded p-2  focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="autofocus bg-slate-600 w-auto m-2 h-auto rounded p-2  focus:outline-none focus:ring-2 focus:ring-blue-500"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
         />
@@ -100,9 +100,9 @@ const Navbar = ({
             onClick={(e) => {
               setDeleted(!deleted);
             }}
-            className="flex flex-col justify-center items-center gap-2"
+            className="flex flex-col justify-center items-center gap-2 h-auto w-auto"
           >
-            <RiDeleteBinLine className="h-10 w-10" />
+            <RiDeleteBinLine className="h-7 w-7" />
             {deleted ? "Show Tasks" : "Show Deleted"}
           </button>
 
@@ -112,7 +112,7 @@ const Navbar = ({
             <DatePicker
               selected={date ? new Date(date) : null}
               onChange={(date) => setDate(date.toISOString().split("T")[0])}
-              className="bg-slate-600 text-white h-7 rounded w-27 items-center justify-center p-1"
+              className="bg-slate-600 text-white h-7 rounded w-[7vmax] items-center justify-center p-1"
               popperClassName="z-50"
               portalId="root"
             />
@@ -123,7 +123,7 @@ const Navbar = ({
             <FaStar className="h-7 w-7" />
             <select
               name="priority"
-              className="h-7 rounded bg-slate-600 text-white items-center justify-center p-1"
+              className="h-7 w-auto rounded bg-slate-600 text-white items-center justify-center p-1"
               value={priority}
               onChange={(e) => setPriority(e.target.value)}
             >
@@ -140,7 +140,7 @@ const Navbar = ({
             <select
               name="status"
               id=""
-              className="w-27 h-7 rounded bg-slate-600 text-white items-center justify-center p-1"
+              className="w-auto h-7 rounded bg-slate-600 text-white items-center justify-center p-1"
               value={status}
               onChange={(e) => setStatus(e.target.value)}
             >
@@ -157,7 +157,7 @@ const Navbar = ({
             <select
               name="tag"
               id=""
-              className="h-7 w-25 rounded bg-slate-600 text-white items-center justify-center p-1"
+              className="h-7 w-auto rounded bg-slate-600 text-white items-center justify-center p-1"
               value={tag}
               onChange={(e) => setTag(e.target.value)}
             >
@@ -230,7 +230,7 @@ const Navbar = ({
               <DatePicker
                 selected={date ? new Date(date) : null}
                 onChange={(date) => setDate(date.toISOString().split("T")[0])}
-                className="bg-slate-600 text-white h-auto rounded p-2 w-auto"
+                className="bg-slate-600 text-white h-auto rounded p-2 w-[15vmax]"
                 portalId="root"
               />
             </div>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useInsertionEffect, useRef } from "react";
 import { useState, useContext } from "react";
 import { TaskContext } from "../Context/TaskContext";
 
@@ -6,10 +6,17 @@ const AddTask = ({ modalOpen, setModalOpen }) => {
   const today = new Date().toISOString().split("T")[0];
   const { tasks, setTasks } = useContext(TaskContext);
 
-  console.log("Modal state:", modalOpen);
-  console.log("Screen width:", window.innerWidth);
 
-  const handleSubmit = (e) => {
+  const taskNameRef = useRef(null);
+  useEffect(() => {
+    if (modalOpen && taskNameRef.current) {
+      taskNameRef.current.focus();
+    }
+  }, [modalOpen]);
+
+  const handleSubmit = (e) =>
+  {
+    setModalOpen(false);
     e.preventDefault();
     const newTask = {
       id: Date.now(),
@@ -73,13 +80,13 @@ const AddTask = ({ modalOpen, setModalOpen }) => {
 
   return (
     <div
-      className="fixed inset-0 backdrop-blur-sm z-50 flex items-center justify-end"
+      className="fixed inset-0 backdrop-blur-sm z-50 flex items-center !lg:justify-center lg:justify-end"
       onClick={(e) => {
         handleBlurClick(e);
       }}
     >
       <div
-        className="flex flex-col items-center justify-end p-6 border-gray-300 bg-white w-auto h-auto m-30 gap-1 rounded-lg shadow-md "
+        className="flex flex-col p-6 border-gray-300 bg-white w-auto h-auto gap-1 rounded-lg shadow-md lg:m-30"
         onClick={(e) => {
           handleFormClick(e);
         }}
@@ -97,6 +104,7 @@ const AddTask = ({ modalOpen, setModalOpen }) => {
         >
           {/* Task Name */}
           <input
+            ref={taskNameRef}
             type="text"
             placeholder="Task name"
             className="w-full p-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
@@ -187,9 +195,6 @@ const AddTask = ({ modalOpen, setModalOpen }) => {
           <button
             type="submit"
             className="w-full p-2 bg-sky-400 text-white font-semibold rounded-md hover:bg-sky-600 transition-colors"
-            onClick={(e) => {
-              setModalOpen(false);
-            }}
           >
             Add
           </button>
