@@ -10,10 +10,10 @@ const Task = ({ value, index }) => {
   const { tasks, setTasks, deletedTasks, setDeletedTasks } =
     useContext(TaskContext);
 
-  const [isHovered, setIsHovered] = useState(false);
+  const [isClicked, setIsClicked] = useState(false);
 
   let priorityColor = "bg-slate-200";
-  if (isHovered === true) {
+  if (isClicked === true) {
     priorityColor = "bg-slate-100";
   } else if (value.taskPriority === "High")
     priorityColor = "bg-red-100 border-red-400";
@@ -53,8 +53,7 @@ const Task = ({ value, index }) => {
     <div
       className={`flex flex-col h-auto w-full border rounded-lg gap-2 p-2 ${priorityColor} transition-all duration-500 ease-in-out whitespace-pre-line`}
       // colour change and expand
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
+      onClick={() => setIsClicked(!isClicked)}
       // drag and drop
       // ref={setNodeRef}
       // {...attributes}
@@ -84,7 +83,7 @@ const Task = ({ value, index }) => {
         />
       </div>
 
-      {isHovered && (
+      {isClicked && (
         <div className="break-words w-full $(isHovered ? 'max-h-100' : 'max-h-0') whitespace-pre-line overflow-hidden transition-all duration-1000 ease-in-out">
           <h4 className="font-bold">Description:</h4> {value.description}
           <br />
