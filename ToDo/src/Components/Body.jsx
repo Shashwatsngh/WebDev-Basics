@@ -120,8 +120,7 @@ const Body = ({
 
   return (
     <div
-      className=" w-full gap-4 p-4 bg-zinc-400 text-gray-900 h-full min-h-screen
-    "
+      className="w-full gap-4 p-4 bg-zinc-400 text-gray-900 min-h-[calc(100vh-theme(spacing.16))]"
       onClick={() => setMobileMenuOpen(false)}
     >
       {/* Desktop */}

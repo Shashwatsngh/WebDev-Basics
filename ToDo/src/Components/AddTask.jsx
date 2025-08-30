@@ -202,10 +202,6 @@ const AddTask = ({ modalOpen, setModalOpen }) => {
         </div>
       </div>
 
-
-
-
-
       {/* Mobile Mode */}
       <div
         className="flex lg:hidden justify-center fixed inset-0 backdrop-blur-sm z-50 flex items-center"
@@ -214,7 +210,7 @@ const AddTask = ({ modalOpen, setModalOpen }) => {
         }}
       >
         <div
-          className="flex flex-col p-6 border-gray-300 bg-white w-80 h-auto gap-1 rounded-lg shadow-md m-5"
+          className="flex flex-col p-6 border-gray-300 bg-white w-[75vw] max-h-[90vh] gap-1 rounded-lg shadow-md m-4 overflow-y-auto"
           onClick={(e) => {
             handleFormClick(e);
           }}
@@ -231,22 +227,32 @@ const AddTask = ({ modalOpen, setModalOpen }) => {
             }}
           >
             {/* Task Name */}
-            <input
+            <textarea
               ref={taskNameRef}
-              type="text"
               placeholder="Task name"
-              className="w-full p-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="w-full p-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none overflow-hidden min-h-[2.5rem]"
               required
               value={taskName}
-              onChange={(e) => setTaskName(e.target.value)}
+              onChange={(e) => {
+                setTaskName(e.target.value);
+                // Auto-resize textarea
+                e.target.style.height = "auto";
+                e.target.style.height = e.target.scrollHeight + "px";
+              }}
+              rows={1}
             />
             {/* Task Description */}
-            <input
-              type="text"
+            <textarea
               placeholder="Task description"
-              className="w-full p-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="w-full p-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none overflow-hidden min-h-[2.5rem]"
               value={taskDes}
-              onChange={(e) => setTaskDes(e.target.value)}
+              onChange={(e) => {
+                setTaskDes(e.target.value);
+                // Auto-resize textarea
+                e.target.style.height = "auto";
+                e.target.style.height = e.target.scrollHeight + "px";
+              }}
+              rows={1}
             />
             {/* Start date */}
             <div className="flex flex-col gap-2 mb-1">

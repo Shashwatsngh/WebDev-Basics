@@ -98,13 +98,13 @@ const Navbar = ({
           onChange={(e) => setSearch(e.target.value)}
         />
 
-        <div className="align-center flex gap-9 text-l font-semibold mr-12">
+        <div className="align-center flex gap-9 text-l font-semibold mr-12 ">
           {/* show deleted tasks */}
           <button
             onClick={(e) => {
               setDeleted(!deleted);
             }}
-            className="flex flex-col justify-center items-center gap-2 h-auto w-auto"
+            className="flex flex-col justify-center items-center gap-2 h-auto w-auto "
           >
             <RiDeleteBinLine className="h-7 w-7" />
             {deleted ? "Show Tasks" : "Show Deleted"}
