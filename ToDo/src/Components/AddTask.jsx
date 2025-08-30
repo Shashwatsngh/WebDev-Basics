@@ -214,7 +214,7 @@ const AddTask = ({ modalOpen, setModalOpen }) => {
         }}
       >
         <div
-          className="flex flex-col p-6 border-gray-300 bg-white w-80 h-auto gap-1 rounded-lg shadow-md"
+          className="flex flex-col p-6 border-gray-300 bg-white w-80 h-auto gap-1 rounded-lg shadow-md m-5"
           onClick={(e) => {
             handleFormClick(e);
           }}

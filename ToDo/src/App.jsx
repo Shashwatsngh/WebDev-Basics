@@ -14,6 +14,7 @@ function App() {
   const [modalOpen, setModalOpen] = useState(false);
   // const [DWM, setDWM] = useState("Day");
   const [deleted, setDeleted] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   return (
     <TaskProvider>
       <Navbar
@@ -29,6 +30,8 @@ function App() {
         setDeleted={setDeleted}
         search={search}
         setSearch={setSearch}
+        mobileMenuOpen={mobileMenuOpen}
+        setMobileMenuOpen={setMobileMenuOpen}
       />
       <Body
         priority={priority}
@@ -37,6 +40,7 @@ function App() {
         date={date}
         deleted={deleted}
         search={search}
+        setMobileMenuOpen={setMobileMenuOpen}
       />
       <AddTaskButton modalOpen={modalOpen} setModalOpen={setModalOpen} />
     </TaskProvider>

@@ -7,7 +7,15 @@ import AddTask from "./AddTask";
 import { SortableContext } from "@dnd-kit/sortable";
 import { DndContext } from "@dnd-kit/core";
 
-const Body = ({ priority, status, tag, date, deleted, search }) => {
+const Body = ({
+  priority,
+  status,
+  tag,
+  date,
+  deleted,
+  search,
+  setMobileMenuOpen,
+}) => {
   const { tasks, setTasks } = useContext(TaskContext);
   const { deletedTasks } = useContext(TaskContext);
 
@@ -111,7 +119,11 @@ const Body = ({ priority, status, tag, date, deleted, search }) => {
   );
 
   return (
-    <div className=" w-full gap-4 p-4 bg-zinc-400 text-gray-900 h-full min-h-screen">
+    <div
+      className=" w-full gap-4 p-4 bg-zinc-400 text-gray-900 h-full min-h-screen
+    "
+      onClick={() => setMobileMenuOpen(false)}
+    >
       {/* Desktop */}
       <div className="hidden lg:flex flex-row gap-4 p-4">
         {/* <DndContext onDragEnd={handleDragEnd}>

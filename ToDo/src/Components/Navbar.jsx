@@ -23,9 +23,10 @@ const Navbar = ({
   setDeleted,
   search,
   setSearch,
+  mobileMenuOpen,
+  setMobileMenuOpen,
 }) => {
   const today = new Date().toISOString().split("T")[0];
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   // Refs for search inputs
   const desktopSearchRef = useRef(null);
@@ -75,7 +76,10 @@ const Navbar = ({
   }, [setSearch]);
 
   return (
-    <div className="sticky top-0 w-full text-white border-b border-neutral-800 bg-slate-900 shadow-md">
+    <div
+      className="sticky top-0 w-full text-white border-b border-neutral-800 bg-slate-900 shadow-md"
+      onClick={() => setMobileMenuOpen(false)}
+    >
       {/* Desktop Layout */}
       <div className="hidden lg:flex justify-between items-center h-auto p-5">
         {/* Logo */}
@@ -173,7 +177,10 @@ const Navbar = ({
       {/* Mobile Layout */}
       <div className="lg:hidden relative">
         {/* Mobile Header */}
-        <div className="flex justify-between items-center p-4">
+        <div
+          className="flex justify-between items-center p-4"
+          onClick={() => setMobileMenuOpen(false)}
+        >
           {/* Logo */}
           <h1 className="font-extrabold text-xl flex gap-3 items-center">
             <FcTodoList className="h-8 w-8" />
@@ -182,7 +189,10 @@ const Navbar = ({
 
           {/* Hamburger Menu Button */}
           <button
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            onClick={(e) => {
+              e.stopPropagation();
+              setMobileMenuOpen(!mobileMenuOpen);
+            }}
             className="p-2"
           >
             {mobileMenuOpen ? (
@@ -194,7 +204,7 @@ const Navbar = ({
         </div>
 
         {/* Mobile Search */}
-        <div className="px-4 pb-4">
+        <div className="px-4 pb-4" onClick={(e) => e.stopPropagation()}>
           <input
             ref={mobileSearchRef}
             type="text"
@@ -207,7 +217,10 @@ const Navbar = ({
 
         {/* Mobile Menu Dropdown */}
         {mobileMenuOpen && (
-          <div className="absolute right-4 top-full bg-slate-800 border border-neutral-700 rounded-lg shadow-xl p-3 w-56 z-50">
+          <div
+            className="absolute right-4 top-full bg-slate-800 border border-neutral-700 rounded-lg shadow-xl p-3 w-56 z-50"
+            onClick={(e) => e.stopPropagation()}
+          >
             <strong className="block text-sm mb-3 text-center">Filters</strong>
 
             {/* show deleted tasks */}
