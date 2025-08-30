@@ -86,39 +86,51 @@ const AddTask = ({ modalOpen, setModalOpen }) => {
         }}
       >
         <div
-          className="flex flex-col p-6 border-gray-300 bg-white w-auto h-auto gap-1 rounded-lg shadow-md lg:m-30"
+          className="flex flex-col p-4 border-gray-300 bg-white w-[30vw] max-h-[95vh] gap-2 rounded-lg shadow-md lg:m-30 overflow-y-auto"
           onClick={(e) => {
             handleFormClick(e);
           }}
         >
-          <h2 className="text-2xl font-bold text-sky-400 mb-4">Add Task</h2>
+          <h2 className="text-2xl font-bold text-sky-400 mb-2">Add Task</h2>
 
           <form
             onClick={(e) => {
               handleFormClick(e);
             }}
-            className="flex flex-col gap-2"
+            className="flex flex-col gap-3"
             onSubmit={(e) => {
               handleSubmit(e);
             }}
           >
             {/* Task Name */}
-            <input
+            <textarea
               ref={taskNameRef}
-              type="text"
               placeholder="Task name"
-              className="w-full p-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="w-full p-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none overflow-hidden min-h-[2.5rem] break-words"
               required
               value={taskName}
-              onChange={(e) => setTaskName(e.target.value)}
+              onChange={(e) => {
+                setTaskName(e.target.value);
+                // Auto-resize textarea
+                e.target.style.height = "auto";
+                e.target.style.height = e.target.scrollHeight + "px";
+              }}
+              rows={1}
+              style={{ wordWrap: "break-word", overflowWrap: "break-word" }}
             />
             {/* Task Description */}
-            <input
-              type="text"
+            <textarea
               placeholder="Task description"
-              className="w-full p-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="w-full p-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none overflow-hidden min-h-[2.5rem] break-words"
               value={taskDes}
-              onChange={(e) => setTaskDes(e.target.value)}
+              onChange={(e) => {
+                setTaskDes(e.target.value);
+                // Auto-resize textarea
+                e.target.style.height = "auto";
+                e.target.style.height = e.target.scrollHeight + "px";
+              }}
+              rows={1}
+              style={{ wordWrap: "break-word", overflowWrap: "break-word" }}
             />
             {/* Start date */}
             <div className="flex flex-col gap-2 mb-1">
@@ -210,18 +222,18 @@ const AddTask = ({ modalOpen, setModalOpen }) => {
         }}
       >
         <div
-          className="flex flex-col p-6 border-gray-300 bg-white w-[75vw] max-h-[90vh] gap-1 rounded-lg shadow-md m-4 overflow-y-auto"
+          className="flex flex-col p-[1.5em] border-gray-300 bg-white w-[75vw] max-h-[90vh] gap-[0.25em] rounded-lg shadow-md m-4 overflow-y-auto"
           onClick={(e) => {
             handleFormClick(e);
           }}
         >
-          <h2 className="text-2xl font-bold text-sky-400 mb-4">Add Task</h2>
+          <h2 className="text-2xl font-bold text-sky-400 mb-[1em]">Add Task</h2>
 
           <form
             onClick={(e) => {
               handleFormClick(e);
             }}
-            className="flex flex-col gap-2"
+            className="flex flex-col gap-[0.5em]"
             onSubmit={(e) => {
               handleSubmit(e);
             }}
@@ -230,7 +242,7 @@ const AddTask = ({ modalOpen, setModalOpen }) => {
             <textarea
               ref={taskNameRef}
               placeholder="Task name"
-              className="w-full p-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none overflow-hidden min-h-[2.5rem]"
+              className="w-full p-[0.5em] border rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none overflow-hidden min-h-[2.5em]"
               required
               value={taskName}
               onChange={(e) => {
@@ -244,7 +256,7 @@ const AddTask = ({ modalOpen, setModalOpen }) => {
             {/* Task Description */}
             <textarea
               placeholder="Task description"
-              className="w-full p-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none overflow-hidden min-h-[2.5rem]"
+              className="w-full p-[0.5em] border rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none overflow-hidden min-h-[2.5em]"
               value={taskDes}
               onChange={(e) => {
                 setTaskDes(e.target.value);
