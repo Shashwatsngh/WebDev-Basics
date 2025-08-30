@@ -171,7 +171,7 @@ const Navbar = ({
       </div>
 
       {/* Mobile Layout */}
-      <div className="lg:hidden">
+      <div className="lg:hidden relative">
         {/* Mobile Header */}
         <div className="flex justify-between items-center p-4">
           {/* Logo */}
@@ -198,7 +198,7 @@ const Navbar = ({
           <input
             ref={mobileSearchRef}
             type="text"
-            placeholder="Search (or just start typing)"
+            placeholder="Search"
             className="bg-slate-600 w-full h-10 rounded p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
@@ -207,76 +207,92 @@ const Navbar = ({
 
         {/* Mobile Menu Dropdown */}
         {mobileMenuOpen && (
-          <div className="bg-slate-800 border-t border-neutral-700 p-4 space-y-4">
-            <strong>Filters</strong>
-            <br />
-            <br />
+          <div className="absolute right-4 top-full bg-slate-800 border border-neutral-700 rounded-lg shadow-xl p-3 w-56 z-50">
+            <strong className="block text-sm mb-3 text-center">Filters</strong>
+
             {/* show deleted tasks */}
-            <div className="flex items-center gap-3 w-auto p-2 rounded">
-              <RiDeleteBinLine className="h-6 w-6" />
+            <div className="flex items-center justify-between mb-2">
+              <span className="text-xs flex items-center gap-1">
+                <RiDeleteBinLine className="h-4 w-4" />
+                Tasks
+              </span>
               <button
                 onClick={(e) => {
                   setDeleted(!deleted);
                 }}
-                className="w-auto p-2 bg-slate-700 hover:bg-slate-600"
+                className="px-2 py-1 bg-slate-600 hover:bg-slate-500 rounded text-xs"
               >
-                {deleted ? "Show Tasks" : "Show Deleted"}
+                {deleted ? "All" : "Deleted"}
               </button>
             </div>
 
             {/* filter by date */}
-            <div className="flex items-center gap-3 p-2">
-              <BsCalendarDay className="h-6 w-6 text-white" />
+            <div className="flex items-center justify-between mb-2">
+              <span className="text-xs flex items-center gap-1">
+                <BsCalendarDay className="h-4 w-4" />
+                Date
+              </span>
               <DatePicker
                 selected={date ? new Date(date) : null}
                 onChange={(date) => setDate(date.toISOString().split("T")[0])}
-                className="bg-slate-600 text-white h-auto rounded p-2 w-[15vmax]"
+                className="bg-slate-600 text-white h-6 rounded px-1 w-20 text-xs"
+                popperClassName="z-50"
+                popperPlacement="bottom-end"
                 portalId="root"
               />
             </div>
 
             {/* filter by priority */}
-            <div className="flex items-center gap-3 p-2">
-              <FaStar className="h-6 w-6" />
+            <div className="flex items-center justify-between mb-2">
+              <span className="text-xs flex items-center gap-1">
+                <FaStar className="h-4 w-4" />
+                Priority
+              </span>
               <select
                 name="priority"
-                className="h-auto rounded bg-slate-600 text-white p-2 w-auto"
+                className="bg-slate-600 text-white h-6 rounded px-1 w-20 text-xs"
                 value={priority}
                 onChange={(e) => setPriority(e.target.value)}
               >
-                <option value="All">All Priority</option>
+                <option value="All">All</option>
                 <option value="High">High</option>
-                <option value="Medium">Medium</option>
+                <option value="Medium">Med</option>
                 <option value="Low">Low</option>
               </select>
             </div>
 
             {/* filter by status */}
-            <div className="flex items-center gap-3 p-2">
-              <MdFilterList className="h-6 w-6" />
+            <div className="flex items-center justify-between mb-2">
+              <span className="text-xs flex items-center gap-1">
+                <MdFilterList className="h-4 w-4" />
+                Status
+              </span>
               <select
                 name="status"
-                className="h-auto rounded bg-slate-600 text-white p-2 w-auto"
+                className="bg-slate-600 text-white h-6 rounded px-1 w-20 text-xs"
                 value={status}
                 onChange={(e) => setStatus(e.target.value)}
               >
-                <option value="All">All Status</option>
-                <option value="Completed">Completed</option>
+                <option value="All">All</option>
+                <option value="Completed">Done</option>
                 <option value="Pending">Pending</option>
-                <option value="In Progress">In Progress</option>
+                <option value="In Progress">Progress</option>
               </select>
             </div>
 
             {/* filter by tag */}
-            <div className="flex items-center gap-3 p-2">
-              <FaTags className="h-6 w-6" />
+            <div className="flex items-center justify-between">
+              <span className="text-xs flex items-center gap-1">
+                <FaTags className="h-4 w-4" />
+                Tag
+              </span>
               <select
                 name="tag"
-                className="h-auto rounded bg-slate-600 text-white p-2 w-auto"
+                className="bg-slate-600 text-white h-6 rounded px-1 w-20 text-xs"
                 value={tag}
                 onChange={(e) => setTag(e.target.value)}
               >
-                <option value="All">All Tags</option>
+                <option value="All">All</option>
                 <option value="Work">Work</option>
                 <option value="Personal">Personal</option>
                 <option value="Home">Home</option>
